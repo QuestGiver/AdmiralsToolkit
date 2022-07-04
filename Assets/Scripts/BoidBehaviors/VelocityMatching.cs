@@ -4,21 +4,22 @@ using UnityEngine;
 
 public class VelocityMatching : UrgeBehavior
 {
-    public List<GameObject> NeighboringBoids;
-
-    public float AverageNeighborVelocity()
+    public Vector3 AverageNeighborVelocity()
     {
         Vector3 averageVelocity = Vector3.zero; //start with zero
-        foreach (GameObject boid in NeighboringBoids) //for each boid in the flock
+        foreach (GameObject boid in Brain.NieghborhoodBoids) //for each boid in the flock
         {
-            averageVelocity += boid.GetComponent<Rigidbody>().velocity;// 
+            averageVelocity += boid.GetComponent<Boid>().Velocity;// avergae velocity is set to itself plus the velocity of the current boid for this iteration
         }
-        averageVelocity /= NeighboringBoids.Count;
-        return averageVelocity.magnitude * strength;
+        averageVelocity /= Brain.NieghborhoodBoids.Count;
+        return averageVelocity;
     }
+    
+    
 
-    public override void GenerateAccelerationRequest()
+    public override void SetAccelerationRequest()
     {
-
+        CurrentAccelerationRequest.Priority = priority;
+        CurrentAccelerationRequest.Velocity = AverageNeighborVelocity() * strength;
     }
 }

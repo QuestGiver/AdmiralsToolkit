@@ -11,9 +11,9 @@ public class GoalSeeking : UrgeBehavior
         CurrentAccelerationRequest = new AccelerationRequest();
     }
 
-    public override void GenerateAccelerationRequest()
+    public override void SetAccelerationRequest()
     {
-        CurrentAccelerationRequest.Velocity = (Brain.transform.position - goalDestination.position).normalized;
-        CurrentAccelerationRequest.Priority = 0.25f;
+        CurrentAccelerationRequest.Velocity = (Brain.transform.position - goalDestination.position) * strength;
+        CurrentAccelerationRequest.Priority = priority;
     }
 }

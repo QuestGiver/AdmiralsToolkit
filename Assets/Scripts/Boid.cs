@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class Boid : MonoBehaviour
 {
-    [SerializeField] int NieghborhoodSizeLimmit;
-    [SerializeField] float NieghborhoodArea;
-    [SerializeField] List<GameObject> NieghborhoodBoids;
-    [SerializeField] Vector3 NieghborhoodCentroid;
+    [SerializeField] public int NieghborhoodSizeLimmit;//number of nieghbors that a boid can register
+    [SerializeField] public float NieghborhoodArea;
+    [SerializeField] public List<GameObject> NieghborhoodBoids;
+    [SerializeField] public Vector3 NieghborhoodCentroid;
+    [SerializeField] public SphereCollider NieghborhoodSphere;
+
 
     [SerializeField] float maximumAcceleration = 5;//this isn't really just a speed limmit, it's a rescource. A "portion" of the maximumAcceleration is given out to acceleration requests until there is none left, ensuring there is less indicision in the swarm.
-    [SerializeField] Vector3 Velocity;
+    [SerializeField] public Vector3 Velocity;
 
     [SerializeField] List<UrgeBehavior> urgeBehaviors;//The list of behaviors that currently contribute acceleration requests.
     List<AccelerationRequest> accelerationRequests = new List<AccelerationRequest>();
@@ -18,6 +20,7 @@ public class Boid : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        NieghborhoodSphere.radius = NieghborhoodArea;
         foreach (UrgeBehavior boid in urgeBehaviors)
         {
             boid.Brain = this;
@@ -40,8 +43,8 @@ public class Boid : MonoBehaviour
 
         foreach (AccelerationRequest request in accelerationRequests)
         {
-            float requestedAcceleration = (request.Velocity * request.Priority).magnitude;
-            if ((totalAcceleration + requestedAcceleration) < maximumAcceleration)
+            float requestedAcceleration = (request.Velocity).magnitude;
+            if ((totalAcceleration + requestedAcceleration) < maximumAcceleration)//make sure we don't blow our budget for acceleration
             {
                 totalAcceleration += requestedAcceleration;
             }
@@ -49,14 +52,9 @@ public class Boid : MonoBehaviour
             {
                 break;
             }
-            Velocity += request.Velocity * request.Priority;
+            Velocity += request.Velocity;
         }
-
-        if (totalAcceleration < maximumAcceleration)
-        {
-            Velocity = Velocity * (maximumAcceleration - totalAcceleration);
-        }
-
+        
         Velocity = Velocity * Time.deltaTime;
     }
 
@@ -69,17 +67,56 @@ public class Boid : MonoBehaviour
 
         foreach (UrgeBehavior urge in urgeBehaviors)
         {
-            urge.GenerateAccelerationRequest();
+            urge.SetAccelerationRequest();
             accelerationRequests.Add(urge.CurrentAccelerationRequest);
         }
     }
-
 
     void PrioritizeRequests()
     {
         //Sort accelerationRequests by priority
         accelerationRequests.Sort((x, y) => x.Priority.CompareTo(y.Priority));
     }
+
+    //Nieghborhood Functions
+
+    //calculate the centroid position of NieghborhoodBoids
+    public void CalculateNieghborhoodCentroid()
+    {
+        NieghborhoodCentroid = Vector3.zero;
+        foreach (GameObject boid in NieghborhoodBoids)
+        {
+            NieghborhoodCentroid += boid.transform.position;
+        }
+        NieghborhoodCentroid /= NieghborhoodBoids.Count;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Boid")
+        {
+            AddNieghborhoodBoid(other.gameObject);
+            NieghborhoodCentroid += other.gameObject.transform.position;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Boid")
+        {
+            NieghborhoodBoids.Remove(other.gameObject);
+            NieghborhoodCentroid -= other.gameObject.transform.position;
+        }
+    }
+
+    public void AddNieghborhoodBoid(GameObject newBoid)
+    {
+        if (NieghborhoodBoids.Count < NieghborhoodSizeLimmit)
+        {
+            NieghborhoodBoids.Add(newBoid);
+        }
+    }
+
 
 
 }

@@ -8,5 +8,6 @@ public abstract class UrgeBehavior : MonoBehaviour
     public Boid Brain;
     public AccelerationRequest CurrentAccelerationRequest;
     public float strength;
-    public abstract void GenerateAccelerationRequest();
+    public float priority;
+    public abstract void SetAccelerationRequest();
 }
