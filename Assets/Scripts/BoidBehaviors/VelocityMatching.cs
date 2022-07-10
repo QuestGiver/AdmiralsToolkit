@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class VelocityMatching : UrgeBehavior
 {
+
+    void Start()
+    {
+        CurrentAccelerationRequest = new AccelerationRequest();
+    }
+
     public Vector3 AverageNeighborVelocity()
     {
         Vector3 averageVelocity = Vector3.zero; //start with zero
@@ -15,11 +21,9 @@ public class VelocityMatching : UrgeBehavior
         return averageVelocity;
     }
     
-    
-
     public override void SetAccelerationRequest()
     {
         CurrentAccelerationRequest.Priority = priority;
-        CurrentAccelerationRequest.Velocity = AverageNeighborVelocity() * strength;
+        CurrentAccelerationRequest.Velocity = AverageNeighborVelocity().normalized * strength;
     }
 }

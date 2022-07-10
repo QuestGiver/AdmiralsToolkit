@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class FlockCentering : UrgeBehavior
 {
+    void Start()
+    {
+        CurrentAccelerationRequest = new AccelerationRequest();
+    }
+
     public override void SetAccelerationRequest()
     {
 

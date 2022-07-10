@@ -30,6 +30,7 @@ public class Boid : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        CalculateNieghborhoodCentroid();
         ResolveUrges();
         transform.position = transform.position - Velocity;
     }
@@ -117,6 +118,7 @@ public class Boid : MonoBehaviour
         }
     }
 
+    
 
 
 }

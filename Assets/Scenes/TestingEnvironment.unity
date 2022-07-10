@@ -137,11 +137,12 @@ GameObject:
   - component: {fileID: 302992397}
   - component: {fileID: 302992396}
   - component: {fileID: 302992395}
+  - component: {fileID: 302992401}
   - component: {fileID: 302992394}
   - component: {fileID: 302992393}
   m_Layer: 0
   m_Name: Boid (4)
-  m_TagString: Untagged
+  m_TagString: Boid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -187,8 +188,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37f0ae89303216647a44d9bd8bb698fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NieghborhoodSizeLimmit: 7
-  NieghborhoodArea: 3
+  NieghborhoodSizeLimmit: 30
+  NieghborhoodArea: 10
   NieghborhoodBoids: []
   NieghborhoodCentroid: {x: 0, y: 0, z: 0}
   NieghborhoodSphere: {fileID: 302992394}
@@ -196,6 +197,7 @@ MonoBehaviour:
   Velocity: {x: 0, y: 0, z: 0}
   urgeBehaviors:
   - {fileID: 302992396}
+  - {fileID: 302992401}
 --- !u!114 &302992396
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -209,10 +211,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Brain: {fileID: 302992395}
-  CurrentAccelerationRequest: {fileID: 0}
   strength: 0.25
   priority: 0.25
-  goalDestination: {fileID: 2113362889}
+  goalDestination: {fileID: 807931487}
 --- !u!135 &302992397
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -289,8 +290,23 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &302992401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 302992392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ba4449509404af4ba4a7fdae99e2456, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Brain: {fileID: 0}
+  strength: 0.25
+  priority: 0
 --- !u!1 &308530663
 GameObject:
   m_ObjectHideFlags: 0
@@ -305,11 +321,12 @@ GameObject:
   - component: {fileID: 308530668}
   - component: {fileID: 308530667}
   - component: {fileID: 308530666}
+  - component: {fileID: 308530672}
   - component: {fileID: 308530665}
   - component: {fileID: 308530664}
   m_Layer: 0
   m_Name: Boid (1)
-  m_TagString: Untagged
+  m_TagString: Boid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -355,8 +372,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37f0ae89303216647a44d9bd8bb698fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NieghborhoodSizeLimmit: 7
-  NieghborhoodArea: 3
+  NieghborhoodSizeLimmit: 30
+  NieghborhoodArea: 10
   NieghborhoodBoids: []
   NieghborhoodCentroid: {x: 0, y: 0, z: 0}
   NieghborhoodSphere: {fileID: 308530665}
@@ -364,6 +381,7 @@ MonoBehaviour:
   Velocity: {x: 0, y: 0, z: 0}
   urgeBehaviors:
   - {fileID: 308530667}
+  - {fileID: 308530672}
 --- !u!114 &308530667
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -377,10 +395,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Brain: {fileID: 308530666}
-  CurrentAccelerationRequest: {fileID: 0}
   strength: 0.25
   priority: 0.25
-  goalDestination: {fileID: 2113362889}
+  goalDestination: {fileID: 807931487}
 --- !u!135 &308530668
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -457,8 +474,23 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &308530672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 308530663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ba4449509404af4ba4a7fdae99e2456, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Brain: {fileID: 0}
+  strength: 0.25
+  priority: 0
 --- !u!1 &567856242
 GameObject:
   m_ObjectHideFlags: 0
@@ -473,11 +505,12 @@ GameObject:
   - component: {fileID: 567856247}
   - component: {fileID: 567856246}
   - component: {fileID: 567856245}
+  - component: {fileID: 567856251}
   - component: {fileID: 567856244}
   - component: {fileID: 567856243}
   m_Layer: 0
   m_Name: Boid (5)
-  m_TagString: Untagged
+  m_TagString: Boid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -523,8 +556,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37f0ae89303216647a44d9bd8bb698fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NieghborhoodSizeLimmit: 7
-  NieghborhoodArea: 3
+  NieghborhoodSizeLimmit: 30
+  NieghborhoodArea: 10
   NieghborhoodBoids: []
   NieghborhoodCentroid: {x: 0, y: 0, z: 0}
   NieghborhoodSphere: {fileID: 567856244}
@@ -532,6 +565,7 @@ MonoBehaviour:
   Velocity: {x: 0, y: 0, z: 0}
   urgeBehaviors:
   - {fileID: 567856246}
+  - {fileID: 567856251}
 --- !u!114 &567856246
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -545,7 +579,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Brain: {fileID: 567856245}
-  CurrentAccelerationRequest: {fileID: 0}
   strength: 0.25
   priority: 0.25
   goalDestination: {fileID: 2113362889}
@@ -625,8 +658,23 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &567856251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 567856242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ba4449509404af4ba4a7fdae99e2456, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Brain: {fileID: 0}
+  strength: 0.25
+  priority: 0
 --- !u!1 &607997641
 GameObject:
   m_ObjectHideFlags: 0
@@ -641,11 +689,12 @@ GameObject:
   - component: {fileID: 607997644}
   - component: {fileID: 607997643}
   - component: {fileID: 607997642}
+  - component: {fileID: 607997650}
   - component: {fileID: 607997648}
   - component: {fileID: 607997649}
   m_Layer: 0
   m_Name: Boid
-  m_TagString: Untagged
+  m_TagString: Boid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -662,8 +711,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37f0ae89303216647a44d9bd8bb698fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NieghborhoodSizeLimmit: 7
-  NieghborhoodArea: 3
+  NieghborhoodSizeLimmit: 30
+  NieghborhoodArea: 10
   NieghborhoodBoids: []
   NieghborhoodCentroid: {x: 0, y: 0, z: 0}
   NieghborhoodSphere: {fileID: 607997648}
@@ -671,6 +720,7 @@ MonoBehaviour:
   Velocity: {x: 0, y: 0, z: 0}
   urgeBehaviors:
   - {fileID: 607997643}
+  - {fileID: 607997650}
 --- !u!114 &607997643
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -684,10 +734,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Brain: {fileID: 607997642}
-  CurrentAccelerationRequest: {fileID: 0}
   strength: 0.25
   priority: 0.25
-  goalDestination: {fileID: 2113362889}
+  goalDestination: {fileID: 807931487}
 --- !u!135 &607997644
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -764,7 +813,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!135 &607997648
 SphereCollider:
@@ -795,6 +844,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &607997650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 607997641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ba4449509404af4ba4a7fdae99e2456, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Brain: {fileID: 0}
+  strength: 0.25
+  priority: 0
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -882,13 +946,110 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705507993}
   m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalPosition: {x: -14.4, y: 17.82, z: -22.67}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &807931483
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 807931487}
+  - component: {fileID: 807931486}
+  - component: {fileID: 807931485}
+  - component: {fileID: 807931484}
+  m_Layer: 0
+  m_Name: Goal (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &807931484
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 807931483}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &807931485
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 807931483}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &807931486
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 807931483}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &807931487
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 807931483}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 32.3, y: 6.088084, z: 25.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -966,7 +1127,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalPosition: {x: -13.3, y: 1, z: -88.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -987,11 +1148,12 @@ GameObject:
   - component: {fileID: 1372245136}
   - component: {fileID: 1372245135}
   - component: {fileID: 1372245134}
+  - component: {fileID: 1372245140}
   - component: {fileID: 1372245133}
   - component: {fileID: 1372245132}
   m_Layer: 0
   m_Name: Boid (3)
-  m_TagString: Untagged
+  m_TagString: Boid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1037,8 +1199,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37f0ae89303216647a44d9bd8bb698fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NieghborhoodSizeLimmit: 7
-  NieghborhoodArea: 3
+  NieghborhoodSizeLimmit: 30
+  NieghborhoodArea: 10
   NieghborhoodBoids: []
   NieghborhoodCentroid: {x: 0, y: 0, z: 0}
   NieghborhoodSphere: {fileID: 1372245133}
@@ -1046,6 +1208,7 @@ MonoBehaviour:
   Velocity: {x: 0, y: 0, z: 0}
   urgeBehaviors:
   - {fileID: 1372245135}
+  - {fileID: 1372245140}
 --- !u!114 &1372245135
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1059,7 +1222,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Brain: {fileID: 1372245134}
-  CurrentAccelerationRequest: {fileID: 0}
   strength: 0.25
   priority: 0.25
   goalDestination: {fileID: 2113362889}
@@ -1139,8 +1301,23 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1372245140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1372245131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ba4449509404af4ba4a7fdae99e2456, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Brain: {fileID: 0}
+  strength: 0.25
+  priority: 0
 --- !u!1 &1975465086
 GameObject:
   m_ObjectHideFlags: 0
@@ -1155,11 +1332,12 @@ GameObject:
   - component: {fileID: 1975465091}
   - component: {fileID: 1975465090}
   - component: {fileID: 1975465089}
+  - component: {fileID: 1975465095}
   - component: {fileID: 1975465088}
   - component: {fileID: 1975465087}
   m_Layer: 0
   m_Name: Boid (2)
-  m_TagString: Untagged
+  m_TagString: Boid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1205,8 +1383,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37f0ae89303216647a44d9bd8bb698fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NieghborhoodSizeLimmit: 7
-  NieghborhoodArea: 3
+  NieghborhoodSizeLimmit: 30
+  NieghborhoodArea: 10
   NieghborhoodBoids: []
   NieghborhoodCentroid: {x: 0, y: 0, z: 0}
   NieghborhoodSphere: {fileID: 1975465088}
@@ -1214,6 +1392,7 @@ MonoBehaviour:
   Velocity: {x: 0, y: 0, z: 0}
   urgeBehaviors:
   - {fileID: 1975465090}
+  - {fileID: 1975465095}
 --- !u!114 &1975465090
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1227,7 +1406,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Brain: {fileID: 1975465089}
-  CurrentAccelerationRequest: {fileID: 0}
   strength: 0.25
   priority: 0.25
   goalDestination: {fileID: 2113362889}
@@ -1307,8 +1485,23 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1975465095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1975465086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ba4449509404af4ba4a7fdae99e2456, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Brain: {fileID: 0}
+  strength: 0.25
+  priority: 0
 --- !u!1 &2113362885
 GameObject:
   m_ObjectHideFlags: 0
@@ -1404,5 +1597,5 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
