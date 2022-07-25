@@ -4,20 +4,35 @@ using UnityEngine;
 
 public class AvoidOvercrowding : UrgeBehavior
 {
-    public float MinimumDistance = 0.25f;
+    public float IdealDistance = 5f;
+    [SerializeField]float normalizedDifference;
+    [SerializeField] float totalStrength;
 
     void Start()
     {
         CurrentAccelerationRequest = new AccelerationRequest();
     }
 
+
     public override void SetAccelerationRequest()
     {
-        if (Vector3.Distance(Brain.transform.position, Brain.NieghborhoodCentroid) < MinimumDistance)
+        if (Brain.NieghborhoodBoids.Count > 0)
         {
-            
-            CurrentAccelerationRequest.Velocity = (Brain.transform.position + Brain.NieghborhoodCentroid).normalized * strength;
+            float _boidDistance = Vector3.Distance(Brain.transform.position, Brain.NieghborhoodCentroid);
+
+            normalizedDifference = 1 - ((_boidDistance) / (IdealDistance));
+            totalStrength = (strength * (normalizedDifference + 1));
+
+            CurrentAccelerationRequest.Velocity = (Brain.transform.position - Brain.NieghborhoodCentroid).normalized * totalStrength;
             CurrentAccelerationRequest.Priority = priority;
+
+
         }
+        else
+        {
+            CurrentAccelerationRequest.Velocity = Vector3.zero;
+            CurrentAccelerationRequest.Priority = 0;
+        }
+
     }
 }

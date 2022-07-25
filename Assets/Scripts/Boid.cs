@@ -21,8 +21,17 @@ public class Boid : MonoBehaviour
     void Start()
     {
         NieghborhoodSphere.radius = NieghborhoodArea;
-        foreach (UrgeBehavior boid in urgeBehaviors)
+
+        //Get components of type UrgeBehavior
+        
+
+
+        foreach (UrgeBehavior boid in GetComponents<UrgeBehavior>())
         {
+            if (!urgeBehaviors.Contains(boid))
+            {
+                urgeBehaviors.Add(boid);
+            }
             boid.Brain = this;
         }
     }
@@ -31,6 +40,7 @@ public class Boid : MonoBehaviour
     void Update()
     {
         CalculateNieghborhoodCentroid();
+        Debug.Log(NieghborhoodCentroid);
         ResolveUrges();
         transform.position = transform.position - Velocity;
     }
@@ -53,7 +63,10 @@ public class Boid : MonoBehaviour
             {
                 break;
             }
-            Velocity += request.Velocity;
+            if (request.Velocity.magnitude > 0)
+            {
+                Velocity += request.Velocity;
+            }
         }
         
         Velocity = Velocity * Time.deltaTime;
@@ -80,6 +93,8 @@ public class Boid : MonoBehaviour
     }
 
     //Nieghborhood Functions
+    //redo the nieghborhood functions to only include the three closest boids so the script no longer pays attention to the entire flock
+    
 
     //calculate the centroid position of NieghborhoodBoids
     public void CalculateNieghborhoodCentroid()
@@ -90,6 +105,7 @@ public class Boid : MonoBehaviour
             NieghborhoodCentroid += boid.transform.position;
         }
         NieghborhoodCentroid /= NieghborhoodBoids.Count;
+        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -100,7 +116,7 @@ public class Boid : MonoBehaviour
             NieghborhoodCentroid += other.gameObject.transform.position;
         }
     }
-
+    
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.tag == "Boid")
