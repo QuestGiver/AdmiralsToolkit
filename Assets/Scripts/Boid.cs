@@ -93,7 +93,9 @@ public class Boid : MonoBehaviour
     }
 
     //Nieghborhood Functions
-    //redo the nieghborhood functions to only include the three closest boids so the script no longer pays attention to the entire flock
+    //redo the nieghborhood functions to include finding the three closest boids so
+    //the script no longer needs to pay attention to the entire flock
+    //
     
 
     //calculate the centroid position of NieghborhoodBoids
