@@ -18,12 +18,12 @@ public class AvoidOvercrowding : UrgeBehavior
     {
         if (Brain.NieghborhoodBoids.Count > 0)
         {
-            float _boidDistance = Vector3.Distance(Brain.transform.position, Brain.NieghborhoodCentroid);
+            float _boidDistance = Vector3.Distance(Brain.transform.position, Brain.LocalGroupCentroid);
 
             normalizedDifference = 1 - ((_boidDistance) / (IdealDistance));
             totalStrength = (strength * (normalizedDifference + 1));
 
-            CurrentAccelerationRequest.Velocity = (Brain.transform.position - Brain.NieghborhoodCentroid).normalized * totalStrength;
+            CurrentAccelerationRequest.Velocity = (Brain.transform.position - Brain.LocalGroupCentroid).normalized * totalStrength;
             CurrentAccelerationRequest.Priority = priority;
 
 

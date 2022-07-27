@@ -4,10 +4,18 @@ using UnityEngine;
 
 public class Boid : MonoBehaviour
 {
+    //2/26/22
+    //rework the boids to havea  flock ID so that you can search through the hierarchy to look
+    //for a boid tag and then determine if the boids have the right flock ID to join the neighborhood.
+    //This will remove the clunky AF collider system
+    
     [SerializeField] public int NieghborhoodSizeLimmit;//number of nieghbors that a boid can register
     [SerializeField] public float NieghborhoodArea;
     [SerializeField] public List<GameObject> NieghborhoodBoids;
+    [SerializeField] public List<GameObject> LocalGroupBoids;
     [SerializeField] public Vector3 NieghborhoodCentroid;
+    [SerializeField] public Vector3 LocalGroupCentroid;
+    [SerializeField] public int LocalGroupSize = 3;
     [SerializeField] public SphereCollider NieghborhoodSphere;
 
 
@@ -34,12 +42,16 @@ public class Boid : MonoBehaviour
             }
             boid.Brain = this;
         }
+
+        StartCoroutine(SortNieghborsIntermittent());
+        
     }
 
     // Update is called once per frame
     void Update()
     {
         CalculateNieghborhoodCentroid();
+        CalculateLocalGroupCentroid();
         Debug.Log(NieghborhoodCentroid);
         ResolveUrges();
         transform.position = transform.position - Velocity;
@@ -69,7 +81,25 @@ public class Boid : MonoBehaviour
             }
         }
         
-        Velocity = Velocity * Time.deltaTime;
+        Velocity = Velocity * Time.deltaTime * 5;
+    }
+
+    //The following coroutine sorts the NieghborhoodBoids every 5 seconds
+    IEnumerator SortNieghborsIntermittent()
+    {
+        while (true)
+        {
+            if (NieghborhoodBoids.Count > 1)
+            {
+                SortNieghborhoodBoids();
+                LocalGroupBoids.Clear();
+                for (int i = 0; i < Mathf.Min(LocalGroupSize, NieghborhoodBoids.Count); i++)
+                {
+                    LocalGroupBoids.Add(NieghborhoodBoids[i]);
+                }
+            }
+            yield return new WaitForSeconds(0f);
+        }
     }
 
     void ProcessAccelerationRequests()
@@ -92,7 +122,7 @@ public class Boid : MonoBehaviour
         accelerationRequests.Sort((x, y) => x.Priority.CompareTo(y.Priority));
     }
 
-    //Nieghborhood Functions
+    //Nieghborhood Functions 2/25/22
     //redo the nieghborhood functions to include finding the three closest boids so
     //the script no longer needs to pay attention to the entire flock
     //
@@ -108,6 +138,23 @@ public class Boid : MonoBehaviour
         }
         NieghborhoodCentroid /= NieghborhoodBoids.Count;
         
+    }
+
+    //Sort the NieghborhoodBoids by distance from the current boid
+    public void SortNieghborhoodBoids()
+    {
+        NieghborhoodBoids.Sort((x, y) => Vector3.Distance(x.transform.position, transform.position).CompareTo(Vector3.Distance(y.transform.position, transform.position)));
+    }
+
+    //calculate the centroid position of LocalGroundBoids
+    public void CalculateLocalGroupCentroid()
+    {
+        LocalGroupCentroid = Vector3.zero;
+        foreach (GameObject boid in LocalGroupBoids)
+        {
+            LocalGroupCentroid += boid.transform.position;
+        }
+        LocalGroupCentroid /= LocalGroupBoids.Count;
     }
 
     private void OnTriggerEnter(Collider other)

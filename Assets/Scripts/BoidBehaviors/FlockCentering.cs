@@ -20,7 +20,6 @@ public class FlockCentering : UrgeBehavior
         {
             float _boidDistance = Vector3.Distance(Brain.transform.position, Brain.NieghborhoodCentroid);
 
-
             normalizedDifference = ((_boidDistance) / (IdealDistance));
             totalStrength = (strength * (normalizedDifference));
 
