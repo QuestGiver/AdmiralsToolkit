@@ -17,6 +17,7 @@ public class Boid : MonoBehaviour
     [SerializeField] public Vector3 LocalGroupCentroid;
     [SerializeField] public int LocalGroupSize = 3;
     [SerializeField] public SphereCollider NieghborhoodSphere;
+    [SerializeField] float _SpeedModifier;
 
 
     [SerializeField] float maximumAcceleration = 5;//this isn't really just a speed limmit, it's a rescource. A "portion" of the maximumAcceleration is given out to acceleration requests until there is none left, ensuring there is less indicision in the swarm.
@@ -81,7 +82,7 @@ public class Boid : MonoBehaviour
             }
         }
         
-        Velocity = Velocity * Time.deltaTime * 5;
+        Velocity = Velocity * Time.deltaTime * _SpeedModifier;
     }
 
     //The following coroutine sorts the NieghborhoodBoids every 5 seconds
@@ -121,11 +122,6 @@ public class Boid : MonoBehaviour
         //Sort accelerationRequests by priority
         accelerationRequests.Sort((x, y) => x.Priority.CompareTo(y.Priority));
     }
-
-    //Nieghborhood Functions 2/25/22
-    //redo the nieghborhood functions to include finding the three closest boids so
-    //the script no longer needs to pay attention to the entire flock
-    //
     
 
     //calculate the centroid position of NieghborhoodBoids
